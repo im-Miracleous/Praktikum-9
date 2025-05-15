@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konverter Mata Uang</title>
+    <link rel="stylesheet" href="/css/Konversi-2472019.css">
+</head>
+<body>
+    <div class="box">
+        <div class="item">
+            <h1>Konversi Mata Uang</h1>
+            <form name="Converter" method="post">
+                <div class="input-group">
+                    <p class="label"><label for="amount">Jumlah Uang</label></p>
+                    <input type="number" name="amount" id="amount" placeholder="Jumlah uang" required>
+                </div>
+                <div class="input-group">
+                    <p class="label"><label for="fromCurrency">Dari Mata Uang</label></p>
+                    <select name="fromCurrency" id="fromCurrency">
+                        <option value="USD" selected>USD - Dolar Amerika</option>
+                        <option value="IDR">IDR - Rupiah Indonesia</option>
+                        <option value="EUR">EUR - Euro</option>
+                        <option value="JPY">JPY - Yen Jepang</option>
+                        <option value="GBP">GBP - Pound Inggris</option>
+                        <option value="SGD">JPY - Dollar Singapura</option>
+                        <option value="AUD">JPY - Dollar Australia</option>
+                    </select>
+                </div>
+
+                <button id="switch" onclick="Switch()">&#x21C4 Tukar Mata Uang</button>
+
+                <div class="input-group">
+                    <p class="label"><label for="toCurrency">Ke Mata Uang</label></p>
+                    <select name="toCurrency" id="toCurrency">
+                        <option value="USD">USD - Dolar Amerika</option>
+                        <option value="IDR" selected>IDR - Rupiah Indonesia</option>
+                        <option value="EUR">EUR - Euro</option>
+                        <option value="JPY">JPY - Yen Jepang</option>
+                        <option value="GBP">GBP - Pound Inggris</option>
+                        <option value="SGD">JPY - Dollar Singapura</option>
+                        <option value="AUD">JPY - Dollar Australia</option>
+                    </select>
+                </div>
+                <button id="convert" onclick="Convert()">Konversi</button>
+            </form>
+            <p class="result"></p>
+        </div>
+    </div>
+</body>
+</html>
