@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman</title>
+</head>
+<link rel="stylesheet" href="/css/Hangman-2472019.css">
+<body>
+    <div class="picture">
+        <img id="lifes-img" src="/img/10.jpg" alt="Hangman picture">
+        <p id="lifes-desc">Lives : 10</p>
+    </div>
+    <div class="content">
+        <div class="inner-content">
+            <h1 id="blanks">______</h1>
+            <p id="clues">A versatile programming language named after a snake, loved for its simplicity.</p>
+            <form name="Validate" method="post">
+                <input type="text" name="letter" id="letter" maxlength="1">
+                <button id="check" type="button" onclick="checkAnswer()">Check</button>
+            </form>
+        </div>
+        <p id="output"></p>
+    </div>
+
+    <script>
+        const words = ["PYTHON", "JAVASCRIPT", "TAILWIND", "REACT", "LARAVEL"];
+        const clues = [
+            "A versatile programming language named after a snake, loved for its simplicity.",
+            "The language that brings interactivity to websites, often abbreviated as JS.",
+            "A utility-first CSS framework for rapidly building custom designs.",
+            "A JavaScript library for building dynamic user interfaces, created by Facebook.",
+            "A PHP framework known for elegant syntax and robust web development tools."
+        ];
+        
+        let selectedWord = "";
+        let selectedClue = "";
+        let answerArray = [];
+        let wrongLetters = [];
+        let mistakes = 0;
+        const maxMistakes = 10;
+
+        const wordDisplay = document.getElementById("blanks");
+        const clueDisplay = document.getElementById("clues");
+        const letterInput = document.getElementById("letter");
+        const guessButton = document.getElementById("check");
+        const message = document.getElementById("output");
+        const hangman = document.getElementById("lifes-img");
+        const lifeCount = document.getElementById("lifes-desc");
+
+        window.onload = function() {
+            generate();
+        };
+
+        function generate() {
+            mistakes = 0;
+            wrongLetters = [];
+            
+            const randomIndex = Math.floor(Math.random() * words.length);
+            selectedWord = words[randomIndex];
+            selectedClue = clues[randomIndex];
+            
+            answerArray = Array(selectedWord.length).fill("_");
+            
+            wordDisplay.innerText = answerArray.join(" ");
+            clueDisplay.innerText = selectedClue;
+            drawHangman();
+            message.innerText = "";
+            guessButton.disabled = false;
+        }
+
+        function drawHangman() {
+            hangman.src = `/img/${maxMistakes - mistakes}.jpg`;
+            lifeCount.innerText = `Lives : ${maxMistakes - mistakes}`;
+        }
+
+        function checkAnswer() {
+            const letter = letterInput.value.toUpperCase();
+            letterInput.value = "";
+
+            if (letter.length === 0) {
+                message.innerText = "Tidak Ada Jawaban!!! Isi Terlebih Dahulu!!";
+                message.style.color = "#e74c3c";
+                return;
+            }
+
+            if (answerArray.includes(letter)) {
+                message.innerText = "Anda sudah menebak huruf ini!";
+                message.style.color = "#e74c3c";
+                return;
+            }
+
+            if (selectedWord.includes(letter)) {
+                for (let i = 0; i < selectedWord.length; i++) {
+                    if (selectedWord[i] === letter) {
+                        answerArray[i] = letter;
+                    }
+                }
+                wordDisplay.innerText = answerArray.join(" ");
+                message.innerText = "Bagus!";
+                message.style.color = "#2ecc71";
+                
+                function checkWin() {
+                    if (!answerArray.includes("_")) {
+                    message.innerText = "Kamu Menang!";
+                    message.style.color = "#2ecc71";
+                    guessButton.disabled = true;
+                    } else if (!wrongLetters.includes(letter)) {
+                    wrongLetters.push(letter);
+                    mistakes++;
+                    drawHangman();
+                    }
+                    message.innerText = "Salah! Huruf tidak ada dalam kata.";
+                    message.style.color = "#e74c3c";
+
+                    if (mistakes >= maxMistakes) {
+                    message.innerText = "Kamu Kalah!";
+                    message.style.color = "#e74c3c";
+                    wordDisplay.innerText = selectedWord.split("").join(" ");
+                    guessButton.disabled = true;
+                    }
+                
+                checkWin();
+
+                }
+                
+            }
+        }
+    </script>
+</body>
+</html>
