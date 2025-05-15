@@ -23,12 +23,12 @@
                         <option value="EUR">EUR - Euro</option>
                         <option value="JPY">JPY - Yen Jepang</option>
                         <option value="GBP">GBP - Pound Inggris</option>
-                        <option value="SGD">JPY - Dollar Singapura</option>
-                        <option value="AUD">JPY - Dollar Australia</option>
+                        <option value="SGD">SGD - Dollar Singapura</option>
+                        <option value="AUD">AUD - Dollar Australia</option>
                     </select>
                 </div>
 
-                <button id="switch" onclick="Switch()">&#x21C4 Tukar Mata Uang</button>
+                <button id="switch" type="button" onclick="Switch()">&#x21C4 Tukar Mata Uang</button>
 
                 <div class="input-group">
                     <p class="label"><label for="toCurrency">Ke Mata Uang</label></p>
@@ -38,14 +38,54 @@
                         <option value="EUR">EUR - Euro</option>
                         <option value="JPY">JPY - Yen Jepang</option>
                         <option value="GBP">GBP - Pound Inggris</option>
-                        <option value="SGD">JPY - Dollar Singapura</option>
-                        <option value="AUD">JPY - Dollar Australia</option>
+                        <option value="SGD">SGD - Dollar Singapura</option>
+                        <option value="AUD">AUD - Dollar Australia</option>
                     </select>
                 </div>
-                <button id="convert" onclick="Convert()">Konversi</button>
+                <button id="convert" type="button" onclick="Convert()">Konversi</button>
             </form>
             <p class="result"></p>
         </div>
     </div>
+
+    <script>
+        function Switch() {
+            var kursAwal = document.getElementById("fromCurrency");
+            var kursAkhir = document.getElementById("toCurrency");
+            var temp = kursAwal.value;
+
+            kursAwal.value = kursAkhir.value;
+            kursAkhir.value = temp;
+        }
+
+        function Convert() {
+            var amount = parseFloat(document.getElementById("amount").value);
+            var kursAwal = document.getElementById("fromCurrency").value;
+            var kursAkhir = document.getElementById("toCurrency").value;
+            var hasil = document.querySelector(".result");
+            var nilaiTukar = {
+                "USD": 1,
+                "IDR": 16500,
+                "EUR": 16500 / 18500,
+                "JPY": 16500 / 165,
+                "GBP": 16500 / 22000,
+                "SGD": 16500 / 12750,
+                "AUD": 16500 / 10500
+            };
+
+            
+            if (!amount) {
+                hasil.innerHTML = "Tidak Ada Jawaban!!! Isi Terlebih Dahulu!!"
+                hasil.style.color = "#e74c3c";
+            } else if (kursAwal === kursAkhir) {
+                hasil.innerHTML = `${amount} ${kursAwal} = ${amount} ${kursAkhir}`;
+                hasil.style.color = "#2575fc";
+            } else {
+                var convertedAmount = Math.round(((amount * nilaiTukar[kursAkhir]) / nilaiTukar[kursAwal]) * 100) / 100;
+                hasil.innerHTML = `${amount} ${kursAwal} = ${convertedAmount} ${kursAkhir}`;
+                hasil.style.color = "#2575fc";
+            }
+        }
+    </script>
 </body>
 </html>

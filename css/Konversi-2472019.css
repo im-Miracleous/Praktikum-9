@@ -11,6 +11,7 @@ body {
     align-items: center;
     height: 100vh;
     background-color: antiquewhite;
+    color: #333;
 }
 
 .box {
@@ -36,6 +37,8 @@ h1 {
 p.label {
     text-align: center;
     margin-top: 1rem;
+    font-size: 11pt;
+    color: #555;
 }
 
 input, select, button {
