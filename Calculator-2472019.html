@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculator</title>
     <link rel="stylesheet" href="/css/Calculator-2472019.css">
 </head>
 <body>
@@ -65,9 +65,9 @@
 
     <script>
         function cekPlus() {
-            let bil1 = document.forms["addition"]["plus1"].value;
-            let bil2 = document.forms["addition"]["plus2"].value;
-            let jawab = document.forms["addition"]["add"].value;
+            let bil1 = parseInt(document.forms["addition"]["plus1"].value);
+            let bil2 = parseInt(document.forms["addition"]["plus2"].value);
+            let jawab = parseInt(document.forms["addition"]["add"].value);
             
             let validate = bil1 + bil2;
             let output = document.querySelector(".resultPlus");
@@ -82,9 +82,9 @@
         }
 
         function cekMinus() {
-            let bil1 = document.forms["subtraction"]["min1"].value;
-            let bil2 = document.forms["subtraction"]["min2"].value;
-            let jawab = document.forms["subtraction"]["subtract"].value;
+            let bil1 = parseInt(document.forms["subtraction"]["min1"].value);
+            let bil2 = parseInt(document.forms["subtraction"]["min2"].value);
+            let jawab = parseInt(document.forms["subtraction"]["subtract"].value);
             
             let validate = bil1 - bil2;
             let output = document.querySelector(".resultMinus");
@@ -99,10 +99,10 @@
         }
 
         function cekNilai() {
-            let cekBil = document.forms["placevalue"]["num"].value;
-            let ratusan = document.forms["placevalue"]["hundreds"].value;
-            let puluhan = document.forms["placevalue"]["tens"].value;
-            let satuan = document.forms["placevalue"]["ones"].value;
+            let cekBil = parseInt(document.forms["placevalue"]["num"].value);
+            let ratusan = parseInt(document.forms["placevalue"]["hundreds"].value);
+            let puluhan = parseInt(document.forms["placevalue"]["tens"].value);
+            let satuan = parseInt(document.forms["placevalue"]["ones"].value);
             
             let outputRatusan = document.querySelector(".resultHundreds");
             let outputPuluhan = document.querySelector(".resultTens");
