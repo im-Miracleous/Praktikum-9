@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/Calculator-2472019.css">
+</head>
+<body>
+    <div class="container">
+
+        <div class="item">
+            <p class="title">Penjumlahan</p>
+            <form name="addition" method="post">
+                <div class="button refresh">
+                    <input type="reset" value="Refresh" onclick="refresh()">
+                </div>
+                <input type="number" name="plus1" id="plus1">
+                +
+                <input type="number" name="plus2" id="plus2">
+                =
+                <input type="number" name="add" id="add">
+                <input type="button" value="Cek Hasil" onclick="cekPlus()">
+            </form>
+            <p class="resultPlus"></p>
+        </div>
+
+        <div class="item">
+            <p class="title">Pengurangan</p>
+            <form name="subtraction" method="post">
+                <div class="button refresh">
+                    <input type="reset" value="Refresh" onclick="refresh()">
+                </div>
+                <input type="number" name="min1" id="min1">
+                -
+                <input type="number" name="min2" id="min2">
+                =
+                <input type="number" name="subtract" id="subtract">
+                <input type="button" value="Cek Hasil" onclick="cekMinus()">
+            </form>
+            <p class="resultMinus"></p>
+        </div>
+
+        <div class="item">
+            <p class="title">Nilai Bilangan</p>
+            <form name="placevalue" method="post">
+                <div class="button refresh">
+                    <input type="reset" value="Refresh" onclick="refresh()">
+                </div>
+                <input type="number" name="num" id="nilai">
+                =
+                <input type="number" name="hundreds" id="hundreds">
+                +
+                <input type="number" name="tens" id="tens">
+                +
+                <input type="number" name="ones" id="ones">
+                <input type="button" value="Cek Hasil" onclick="cekNilai()">
+            </form>
+            <p class="resultHundreds"></p>
+            <p class="resultTens"></p>
+            <p class="resultOnes"></p>
+        </div>
+    </div>
+
+    <script>
+        function cekPlus() {
+            let bil1 = document.forms["addition"]["plus1"].value;
+            let bil2 = document.forms["addition"]["plus2"].value;
+            let jawab = document.forms["addition"]["add"].value;
+            
+            let validate = bil1 + bil2;
+            let output = document.querySelector(".resultPlus");
+
+            if (!bil1 || !bil2 || !jawab) {
+                output.innerHTML = "Tidak Ada Jawaban!!! Isi Terlebih Dahulu!!"
+            } else if (jawab == validate) {
+                output.innerHTML = "Jawaban Benar!!!"
+            } else {
+                output.innerHTML = "Jawaban Salah!!!"
+            }
+        }
+
+        function cekMinus() {
+            let bil1 = document.forms["subtraction"]["min1"].value;
+            let bil2 = document.forms["subtraction"]["min2"].value;
+            let jawab = document.forms["subtraction"]["subtract"].value;
+            
+            let validate = bil1 - bil2;
+            let output = document.querySelector(".resultMinus");
+
+            if (!bil1 || !bil2 || !jawab) {
+                output.innerHTML = "Tidak Ada Jawaban!!! Isi Terlebih Dahulu!!"
+            } else if (jawab == validate) {
+                output.innerHTML = "Jawaban Benar!!!"
+            } else {
+                output.innerHTML = "Jawaban Salah!!!"
+            }
+        }
+
+        function cekNilai() {
+            let cekBil = document.forms["placevalue"]["num"].value;
+            let ratusan = document.forms["placevalue"]["hundreds"].value;
+            let puluhan = document.forms["placevalue"]["tens"].value;
+            let satuan = document.forms["placevalue"]["ones"].value;
+            
+            let outputRatusan = document.querySelector(".resultHundreds");
+            let outputPuluhan = document.querySelector(".resultTens");
+            let outputSatuan = document.querySelector(".resultOnes");
+
+            // VALIDASI RATUSAN
+            if (!cekBil || !ratusan) {
+                outputRatusan.innerHTML = "Tidak Ada Jawaban Ratusan!!! Isi Terlebih Dahulu!!"
+            } else if (ratusan == (Math.floor(cekBil / 100)) * 100) {
+                outputRatusan.innerHTML = "Jawaban Ratusan Benar!!!";
+            } else {
+                outputRatusan.innerHTML = "Jawaban Ratusan Salah!!!"
+            }
+
+            // VALIDASI PULUHAN
+            if (!cekBil || !puluhan) {
+                outputPuluhan.innerHTML = "Tidak Ada Jawaban Puluhan!!! Isi Terlebih Dahulu!!"
+            } else if (puluhan == (Math.floor((cekBil % 100) / 10)) * 10) {
+                outputPuluhan.innerHTML = "Jawaban Puluhan Benar!!!";
+            } else {
+                outputPuluhan.innerHTML = "Jawaban Puluhan Salah!!!"
+            }
+
+            // VALIDASI SATUAN
+            if (!satuan) {
+                outputSatuan.innerHTML = "Tidak Ada Jawaban Satuan!!! Isi Terlebih Dahulu!!"
+            }
+            if (satuan == (Math.floor(((cekBil % 100) % 10) / 1)) * 1) {
+                outputSatuan.innerHTML = "Jawaban Satuan Benar!!!";
+            } else {
+                outputSatuan.innerHTML = "Jawaban Satuan Salah!!!"
+            }
+        }
+    </script>
+</body>
+</html>

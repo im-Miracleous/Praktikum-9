@@ -1,0 +1,15 @@
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+input {
+    padding: 2.5px 5px;
+}
+
+input[type="button"] {
+    margin: 2px;
+    margin-left: 0;
+}
